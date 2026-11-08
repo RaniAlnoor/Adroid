@@ -522,7 +522,8 @@ def propose(group):
             raise ValueError(p["kind"])
         return p
     except Exception as e:  # deterministic fallback keeps the same order
-        restored = sorted({f for h in group for f in h.get("restored", [])})
+        restored = sorted({f for h in group for f in h.get("restored", [])
+                           if not f.startswith(".loop/")})  # .loop/** is already a wall
         if restored:
             return {"kind": "deny", "content": f"Edit(/{restored[0]})", "why": f"rounds kept touching {restored[0]} ({e})"}
         first = (group[-1]["last_failure"] or "").splitlines()[0][:150]
