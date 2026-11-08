@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>AdrInvoiceTotals</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Calculates tax totals for Adroid invoices.
+/// </summary>
+public final class AdrInvoiceTotals
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>calcLineTax</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Calculates the rounded tax for one invoice line.
+    /// </summary>
+    /// <param name = "_line">The invoice line.</param>
+    /// <returns>The tax amount rounded to two decimals.</returns>
+    public AmountCur calcLineTax(AdrInvoiceLine _line)
+    {
+        AmountCur lineAmount = _line.Qty * _line.UnitPrice;
+
+        return round(lineAmount * _line.TaxPct / 100, 0.01);
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>calcInvoiceTax</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Calculates the rounded tax for all lines of an invoice.
+    /// </summary>
+    /// <param name = "_invoiceId">The invoice to total.</param>
+    /// <returns>The sum of the rounded line taxes.</returns>
+    public AmountCur calcInvoiceTax(InvoiceId _invoiceId)
+    {
+        AdrInvoiceLine line;
+        AmountCur      total;
+
+        while select Qty, UnitPrice, TaxPct from line
+            where line.InvoiceId == _invoiceId
+        {
+            total += round(line.Qty * line.UnitPrice * line.TaxPct / 100, 0.01);
+        }
+
+        return total;
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxTable xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>AdrInvoiceLine</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+public class AdrInvoiceLine extends common
+{
+}
+]]></Declaration>
+		<Methods />
+	</SourceCode>
+	<Label>Invoice line</Label>
+	<TableGroup>Transaction</TableGroup>
+	<Fields>
+		<AxTableField xmlns="" i:type="AxTableFieldString">
+			<Name>InvoiceId</Name>
+			<ExtendedDataType>InvoiceId</ExtendedDataType>
+		</AxTableField>
+		<AxTableField xmlns="" i:type="AxTableFieldReal">
+			<Name>Qty</Name>
+			<ExtendedDataType>Qty</ExtendedDataType>
+		</AxTableField>
+		<AxTableField xmlns="" i:type="AxTableFieldReal">
+			<Name>UnitPrice</Name>
+			<ExtendedDataType>PriceCur</ExtendedDataType>
+		</AxTableField>
+		<AxTableField xmlns="" i:type="AxTableFieldReal">
+			<Name>TaxPct</Name>
+			<ExtendedDataType>Percent</ExtendedDataType>
+		</AxTableField>
+	</Fields>
+	<FieldGroups />
+	<Indexes>
+		<AxTableIndex>
+			<Name>InvoiceIdx</Name>
+			<Fields>
+				<AxTableIndexField>
+					<DataField>InvoiceId</DataField>
+				</AxTableIndexField>
+			</Fields>
+		</AxTableIndex>
+	</Indexes>
+	<Relations />
+</AxTable>

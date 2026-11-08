@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AxClass xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Name>AdrInvoiceTotalsTest</Name>
+	<SourceCode>
+		<Declaration><![CDATA[
+/// <summary>
+/// Unit tests for <c>AdrInvoiceTotals</c>.
+/// </summary>
+[SysTestTarget(classStr(AdrInvoiceTotals), UnitTestType::Class)]
+public final class AdrInvoiceTotalsTest extends SysTestCase
+{
+}
+]]></Declaration>
+		<Methods>
+			<Method>
+				<Name>testCalcLineTaxRounds</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// 3 x 10.05 at 19 % is 5.7285 and must round to 5.73.
+    /// </summary>
+    [SysTestMethod]
+    public void testCalcLineTaxRounds()
+    {
+        AdrInvoiceLine line;
+
+        line.Qty       = 3;
+        line.UnitPrice = 10.05;
+        line.TaxPct    = 19;
+
+        this.assertEquals(5.73, new AdrInvoiceTotals().calcLineTax(line));
+    }
+
+]]></Source>
+			</Method>
+		</Methods>
+	</SourceCode>
+</AxClass>
