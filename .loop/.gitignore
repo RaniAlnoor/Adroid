@@ -1,0 +1,5 @@
+state.json
+*.log
+report.md
+run.pid
+rounds/
