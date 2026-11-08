@@ -23,7 +23,7 @@ public final class AdrInvoiceTotals
     {
         AmountCur lineAmount = _line.Qty * _line.UnitPrice;
 
-        return round(lineAmount * _line.TaxPct / 100, 0.01);
+        return this.roundedTax(lineAmount, _line.TaxPct);
     }
 
 ]]></Source>
@@ -44,10 +44,26 @@ public final class AdrInvoiceTotals
         while select Qty, UnitPrice, TaxPct from line
             where line.InvoiceId == _invoiceId
         {
-            total += round(line.Qty * line.UnitPrice * line.TaxPct / 100, 0.01);
+            total += this.roundedTax(line.Qty * line.UnitPrice, line.TaxPct);
         }
 
         return total;
+    }
+
+]]></Source>
+			</Method>
+			<Method>
+				<Name>roundedTax</Name>
+				<Source><![CDATA[
+    /// <summary>
+    /// Calculates the tax on an amount rounded to two decimals.
+    /// </summary>
+    /// <param name = "_amount">The taxable amount.</param>
+    /// <param name = "_taxPct">The tax percentage.</param>
+    /// <returns>The tax amount rounded to two decimals.</returns>
+    private AmountCur roundedTax(AmountCur _amount, Percent _taxPct)
+    {
+        return round(_amount * _taxPct / 100, 0.01);
     }
 
 ]]></Source>
